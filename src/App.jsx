@@ -39,43 +39,6 @@ function App() {
   };
 
   // Rocket launch sound
-  const playRocketSound = async () => {
-    if (mutedRef.current) return;
-
-    const audio = await getAudio();
-    if (!audio) return;
-
-    const oscillator = audio.createOscillator();
-    const gain = audio.createGain();
-
-    oscillator.type = "sawtooth";
-
-    oscillator.frequency.setValueAtTime(
-      180,
-      audio.currentTime
-    );
-
-    oscillator.frequency.exponentialRampToValueAtTime(
-      1000,
-      audio.currentTime + 0.6
-    );
-
-    gain.gain.setValueAtTime(
-      0.12,
-      audio.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-      0.001,
-      audio.currentTime + 0.7
-    );
-
-    oscillator.connect(gain);
-    gain.connect(audio.destination);
-
-    oscillator.start();
-    oscillator.stop(audio.currentTime + 0.7);
-  };
 
   // Explosion sound
   const playExplosionSound = async () => {
@@ -401,31 +364,29 @@ function App() {
   }, []);
 
   // Start celebration
-  const celebrate = async () => {
-    await getAudio();
+ const celebrate = async () => {
+  await getAudio();
 
-    setStarted(true);
+  setStarted(true);
 
-    clearInterval(timerRef.current);
+  clearInterval(timerRef.current);
 
-    let count = 0;
+  let count = 0;
 
-    // Initial rockets
+  // Launch first rocket without sound
+  launchRef.current?.();
+
+  timerRef.current = setInterval(() => {
     launchRef.current?.();
-    playRocketSound();
 
-    timerRef.current = setInterval(() => {
-      launchRef.current?.();
-      playRocketSound();
+    count++;
 
-      count++;
-
-      if (count >= 30) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-    }, 450);
-  };
+    if (count >= 30) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  }, 450);
+};
 
   // Sound toggle
   const toggleSound = () => {
