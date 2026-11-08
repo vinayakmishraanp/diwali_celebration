@@ -41,47 +41,18 @@ function App() {
   // Rocket launch sound
 
   // Explosion sound
-  const playExplosionSound = async () => {
-    if (mutedRef.current) return;
+ // Real firework explosion sound
+const playExplosionSound = () => {
+  if (mutedRef.current) return;
 
-    const audio = await getAudio();
-    if (!audio) return;
+  const sound = new Audio("/public/freesound_community-fireworkblast-106275.mp3");
 
-    const duration = 0.7;
+  sound.volume = 0.8;
 
-    const buffer = audio.createBuffer(
-      1,
-      audio.sampleRate * duration,
-      audio.sampleRate
-    );
-
-    const data = buffer.getChannelData(0);
-
-    for (let i = 0; i < data.length; i++) {
-      data[i] =
-        (Math.random() * 2 - 1) *
-        Math.pow(1 - i / data.length, 2);
-    }
-
-    const noise = audio.createBufferSource();
-    noise.buffer = buffer;
-
-    const gain = audio.createGain();
-
-    gain.gain.setValueAtTime(0.6, audio.currentTime);
-
-    gain.gain.exponentialRampToValueAtTime(
-      0.001,
-      audio.currentTime + duration
-    );
-
-    noise.connect(gain);
-    gain.connect(audio.destination);
-
-    noise.start();
-    noise.stop(audio.currentTime + duration);
-  };
-
+  sound.play().catch((error) => {
+    console.log("Explosion sound error:", error);
+  });
+};
   // Fireworks canvas
   useEffect(() => {
     const canvas = canvasRef.current;
