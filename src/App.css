@@ -1,0 +1,275 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #05020d;
+  font-family: Inter, Arial, sans-serif;
+  overflow: hidden;
+}
+
+.diwali-container {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #30124b 0%,
+      #140824 45%,
+      #05020d 100%
+    );
+}
+
+/* Canvas */
+
+.fireworks-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Navbar */
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  padding: 25px 7%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 5;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #ffd978;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.sound-control {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 11px 18px;
+
+  border: 1px solid #ffffff30;
+  border-radius: 30px;
+
+  background: #ffffff10;
+  color: white;
+
+  cursor: pointer;
+  backdrop-filter: blur(15px);
+}
+
+.sound-control:hover {
+  background: #ffffff25;
+}
+
+/* Hero */
+
+.hero {
+  position: relative;
+  z-index: 2;
+
+  width: min(850px, 90%);
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* Diya */
+
+.diya-icon {
+  font-size: 85px;
+  margin-bottom: 25px;
+
+  filter: drop-shadow(0 0 25px orange);
+
+  animation: diyaAnimation 2s infinite alternate;
+}
+
+@keyframes diyaAnimation {
+  from {
+    transform: scale(1);
+    filter: drop-shadow(0 0 12px orange);
+  }
+
+  to {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 35px gold);
+  }
+}
+
+/* Eyebrow */
+
+.eyebrow {
+  color: #ffd978;
+  letter-spacing: 5px;
+  font-size: 12px;
+  font-weight: 700;
+
+  margin-bottom: 20px;
+}
+
+/* Heading */
+
+.hero h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(55px, 9vw, 105px);
+
+  font-weight: 700;
+  line-height: 1.1;
+
+  color: #fff4d0;
+
+  text-shadow:
+    0 0 10px #ffb700,
+    0 0 30px #ff8800,
+    0 0 60px #ff6600;
+}
+
+.hero h1 span {
+  display: block;
+  color: #ffd34e;
+}
+
+/* Greeting */
+
+.greeting {
+  max-width: 680px;
+
+  margin: 30px auto;
+
+  color: #e9d9f5;
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+/* Main button */
+
+.launch-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  padding: 17px 32px;
+
+  border: none;
+  border-radius: 50px;
+
+  color: #391b08;
+  font-size: 16px;
+  font-weight: 800;
+
+  background: linear-gradient(
+    110deg,
+    #ff9d00,
+    #ffe36e,
+    #ffb000
+  );
+
+  box-shadow:
+    0 0 20px #ff990080,
+    0 0 50px #ff990040;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.launch-button:hover {
+  box-shadow:
+    0 0 30px #ffbb00,
+    0 0 70px #ff8800;
+}
+
+/* Success */
+
+.success-message {
+  margin-top: 30px;
+
+  color: #ffe7a1;
+  font-size: 20px;
+  line-height: 1.8;
+
+  text-shadow: 0 0 15px orange;
+}
+
+/* Footer */
+
+.footer {
+  position: absolute;
+  bottom: 20px;
+
+  width: 100%;
+  text-align: center;
+
+  color: #ffffff75;
+  font-size: 12px;
+
+  z-index: 3;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 18px;
+  }
+
+  .logo {
+    font-size: 13px;
+  }
+
+  .sound-control {
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  .diya-icon {
+    font-size: 65px;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+
+  .greeting {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .launch-button {
+    font-size: 14px;
+    padding: 15px 20px;
+  }
+
+  .success-message {
+    font-size: 16px;
+  }
+}
