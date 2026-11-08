@@ -45,7 +45,7 @@ function App() {
 const playExplosionSound = () => {
   if (mutedRef.current) return;
 
-  const sound = new Audio("/public/freesound_community-fireworkblast-106275.mp3");
+  const sound = new Audio("/audio.mp3");
 
   sound.volume = 0.8;
 
